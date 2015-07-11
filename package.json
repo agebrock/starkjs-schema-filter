@@ -38,8 +38,11 @@
     "grunt": "~0.4.1"
   },
   "keywords": [
-    "starkjs","json","schema"
+    "starkjs",
+    "json",
+    "schema"
   ],
   "dependencies": {
+    "starkjs-underscore": "0.0.1"
   }
 }
