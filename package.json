@@ -1,0 +1,45 @@
+{
+  "name": "starkjs-schema-filter",
+  "description": "The best project ever.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/agebrock/starkjs-schema-filter",
+  "author": {
+    "name": "agebrock",
+    "email": "christoph.hagenbrock@googlemail.com",
+    "url": "https://twitter.com/agebrock"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:agebrock/starkjs-schema-filter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/agebrock/starkjs-schema-filter/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/agebrock/starkjs-schema-filter/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt mochaTest"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "sinon": "^1.10.3",
+    "sinon-chai": "^2.5.0",
+    "grunt-mocha-test": "^0.11.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "starkjs","json","schema"
+  ],
+  "dependencies": {
+  }
+}
