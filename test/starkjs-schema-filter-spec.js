@@ -1,124 +1,140 @@
 var schemaFilter = require('../'),
-    _ = require('starkjs-underscore'),
-    expect = require('chai').expect;
+  _ = require('starkjs-underscore'),
+  expect = require('chai').expect;
 
 var tests = [
-    {
-        should:'set default value on undefined input',
-        schema: {
-            'type': 'string',
-            'default': 'test'
-        },
-        input: undefined,
-        output: 'test'
+  {
+    should: 'set default value on undefined input',
+    schema: {
+      type: 'string',
+      'default': 'test'
     },
-    {
-        should:'set default value on undefined input',
-        schema: {
-            'type': 'string'
-        },
-        input: {a:1},
-        output: {a:1}
+    input: undefined,
+    output: 'test'
+  },
+  {
+    should: 'do not handle objects if type is simple',
+    schema: {
+      type: 'string'
     },
-    {
-        should:'set default value on null input',
-        schema: {
-            'type': 'string',
-            'default': 'test'
-        },
-        input: null,
-        output: 'test'
+    input: {a: 1},
+    output: {a: 1}
+  },
+  {
+    should: 'do not handle arrays if type is simple',
+    schema: {
+      type: 'string'
     },
-    {
-        should:'cast to string',
-        schema: {
-            'type': 'string'
-        },
-        input: 1,
-        output: '1'
+    input: [1, 3, 4],
+    output: [1, 3, 4]
+  },
+  {
+    should: 'set default value on null input',
+    schema: {
+      type: 'string',
+      'default': 'test'
     },
-    {
-        should:'cast to number',
-        schema: {
-            'type': 'number'
-        },
-        input: '1',
-        output: 1
+    input: null,
+    output: 'test'
+  },
+  {
+    should: 'set default value on undefined input',
+    schema: {
+      type: 'string',
+      'default': 'test'
     },
-    {
-        should:'trim a string',
-        schema: {
-            'type': 'string',
-            'trim': true
-        },
-        input: ' test ',
-        output: 'test'
+    input: undefined,
+    output: 'test'
+  },
+  {
+    should: 'cast to string',
+    schema: {
+      type: 'string'
     },
-    {
-        should:'not allow additional properties',
-        schema: {
-            'type': 'object',
-            'properties': {
-                'simple': {
-                    'type': 'string'
-                }
-            }
-        },
-        input: {simple: 1, removeMe: 1},
-        output: {simple: '1'}
+    input: 1,
+    output: '1'
+  },
+  {
+    should: 'cast to number',
+    schema: {
+      type: 'number'
     },
-    {
-        should:'allow additional properties',
-        schema: {
-            'type': 'object',
-            'additionalProperties': true,
-            'properties': {
-                'simple': {
-                    'type': 'string'
-                }
-            }
-        },
-        input: {simple: 1, keepMe: 1},
-        output: {simple: '1', keepMe: 1}
+    input: '1',
+    output: 1
+  },
+  {
+    should: 'trim a string',
+    schema: {
+      type: 'string',
+      trim: true
     },
-    {
-        should:'cast all values inside an array',
-        schema: {
-            'type': 'array',
-            'items': {
-                'type': 'string'
-            }
-        },
-        input: [1, 2, 3],
-        output: ['1', '2', '3']
+    input: ' test ',
+    output: 'test'
+  },
+  {
+    should: 'not allow additional properties',
+    schema: {
+      type: 'object',
+      properties: {
+        simple: {
+          type: 'string'
+        }
+      }
     },
-    {
-        should:'cast deep inside complex structures',
-        schema: {
-            'type': 'array',
-            'items': {
-                'type': 'object',
-                'properties': {
-                    'simple': {
-                        'type': 'string'
-                    }
-                }
-            }
-        },
-        input: [
-            {simple: 1}
-        ],
-        output: [
-            {simple: '1'}
-        ]
-    }
+    input: {simple: 1, removeMe: 1},
+    output: {simple: '1'}
+  },
+  {
+    should: 'allow additional properties',
+    schema: {
+      type: 'object',
+      additionalProperties: true,
+      properties: {
+        simple: {
+          type: 'string'
+        }
+      }
+    },
+    input: {simple: 1, keepMe: 1},
+    output: {simple: '1', keepMe: 1}
+  },
+  {
+    should: 'cast all values inside an array',
+    schema: {
+      type: 'array',
+      items: {
+        type: 'string'
+      }
+    },
+    input: [1, 2, 3],
+    output: ['1', '2', '3']
+  },
+  {
+    should: 'cast deep inside complex structures',
+    schema: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          simple: {
+            type: 'string'
+          }
+        }
+      }
+    },
+    input: [
+      {simple: 1}
+    ],
+    output: [
+      {simple: '1'}
+    ]
+  }
 ];
 
-
-describe('starkjs-schema', function () {
-    _.each(tests, function (test) {
-        it(test.should, function () {
-            expect(schemaFilter(test.schema, test.input)).to.deep.equal(test.output);
-        });
+describe('starkjs-schema', function() {
+  _.each(tests, function(test) {
+    it(test.should, function() {
+      expect(schemaFilter(test.schema, test.input)).to.deep.equal(test.output);
     });
+  });
 });
